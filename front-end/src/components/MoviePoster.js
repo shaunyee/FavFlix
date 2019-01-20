@@ -27,4 +27,6 @@ const MovieTitle = styled.p`
     color: #FFF;
     margin: 0;
     font-size: .85rem;
+    width: 50%;
+    margin: 0 auto;
 `;

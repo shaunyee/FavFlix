@@ -11,6 +11,7 @@ const GetMovie = gql`
 query($movieDBId: Int!){
     getMovie(movieDBId: $movieDBId){
         _id
+        likes
         reviews {
             _id
             review
@@ -35,11 +36,22 @@ class MovieReviews extends Component {
                 <div>
                 <User>
                   {({data: {currentUser}, loading, error}) => {
-                      const userReviews = currentUser.reviews.map(review => review._id);
                       if(loading) return <div>Loading</div>;
+                      if(!currentUser){
+                          return(
+                            <div>
+                            { getMovie.reviews.map(review => {
+                                return(
+                                <ReviewWrapper key={review._id}>
+                                    <MovieReviewSection>{review.review}<p>by: {review.username}</p></MovieReviewSection>
+                                </ReviewWrapper>
+                            )})}
+                        </div>
+                          )}
                       return(
                         <div>
                             { getMovie.reviews.map(review => {
+                                const userReviews = currentUser.reviews.map(review => review._id);
                                 const madeReview = userReviews.includes(review._id);
                                 return(
                                 <ReviewWrapper key={review._id}>

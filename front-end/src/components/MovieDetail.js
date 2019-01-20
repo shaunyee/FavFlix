@@ -67,10 +67,11 @@ class MovieDetail extends Component {
                 const inDB = movieDBIds.includes(movie.id);
                 if(!currentUser){
                   return(
-                    <div>
+                      <UserReviewSection>
                       <h1>Reviews</h1>
+                      <SectionBreak></SectionBreak>
                       {inDB && <MovieReviews movieDBId={movie.id} />}
-                    </div>
+                      </UserReviewSection>
                   )
                 }
                 const usersSeenMovies = currentUser.moviesSeen.map(movie => movie.movieDBId);
@@ -80,11 +81,9 @@ class MovieDetail extends Component {
                   {!seenThisMovie && <SeenMovie movie={movie} user={currentUser}/>}
                {seenThisMovie && <AddToFavorites movie={movie} user={currentUser}/>}
                {seenThisMovie &&<AddReview title={movie.title} username={currentUser.username} movieDBId={movie.id} posterPath={movie.poster_path}/>}
-                    <div>
                       <h1>Reviews</h1>
                       <SectionBreak></SectionBreak>
                       {inDB && <MovieReviews movieDBId={movie.id} />}
-                    </div>
               </UserReviewSection>
               )}}
               </Query>
@@ -105,10 +104,14 @@ const MovieWrapper = styled.div`
 `;
 
 const MovieInfo = styled.div`
-  background: white;
+  background: var(--main-bg-color);
   text-align: left;
   padding: 2rem 10%;
   display: flex;
+  color: white;
+  h1 {
+    color: var(--main-green);
+  }
   > div {
     margin-left: 20px;
   }
