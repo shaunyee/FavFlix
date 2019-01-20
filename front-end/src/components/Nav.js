@@ -30,7 +30,7 @@ class Nav extends Component {
                 return (
                 <NavBar onClick={(e) => this.navScroll(e)}>
                     <NavItems>
-                        <Link to={`/`}>Home</Link>
+                        <Link to={`/`}><b>Fav Flix</b></Link>
                         {!currentUser && (
                             <Fragment>
                                 <Link to={`/signup`}>Sign Up</Link>
