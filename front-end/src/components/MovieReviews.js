@@ -5,6 +5,7 @@ import { Query } from 'react-apollo';
 import Error from './utils/Error';
 import DeleteReview from './DeleteReview';
 import User from './auth/User';
+import styled from 'styled-components';
 
 const GetMovie = gql`
 query($movieDBId: Int!){
@@ -41,9 +42,9 @@ class MovieReviews extends Component {
                             { getMovie.reviews.map(review => {
                                 const madeReview = userReviews.includes(review._id);
                                 return(
-                                <ul key={review._id}>
-                                    <ul>{review.review}{madeReview && <span><DeleteReview id={review._id} movieDBId={movieDBId}/></span>}<p>by: {review.username}</p></ul>
-                                </ul>
+                                <ReviewWrapper key={review._id}>
+                                    <MovieReviewSection>{review.review}{madeReview && <span><DeleteReview id={review._id} movieDBId={movieDBId}/></span>}<p>by: {review.username}</p></MovieReviewSection>
+                                </ReviewWrapper>
                             )})}
                         </div>
                       )}}  
@@ -54,5 +55,15 @@ class MovieReviews extends Component {
     )
   }
 }
+
+const ReviewWrapper = styled.ul`
+    padding-left: 0;
+    margin-left: 0;
+    color: var(--main-text-color);
+`;
+const MovieReviewSection = styled.ul`
+    margin-left: 0;
+    padding-left: 0;
+`;
 export default MovieReviews;
 export {GetMovie};
