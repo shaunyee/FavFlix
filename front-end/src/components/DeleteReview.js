@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 
 import { GetMovie } from './MovieReviews';
+import styled from 'styled-components';
 
 const DeleteUserReview = gql`
 mutation($_id: String!) {
@@ -20,9 +21,13 @@ const DeleteReview = ({id, movieDBId}) => {
     refetchQueries={[{query: GetMovie, variables: {movieDBId}}]}
     >
     {(deleteReview, {loading}) => (
-        <button onClick={() => deleteReview()}>Delet{loading ? "ing" : "e"}</button>
+        <DeleteReviewBtn onClick={() => deleteReview()}>Delet{loading ? "ing" : "e"}</DeleteReviewBtn>
     )}
     </Mutation>
   )
 }
+
+const DeleteReviewBtn = styled.button`
+  margin-left: 2rem;
+`;
 export default DeleteReview;

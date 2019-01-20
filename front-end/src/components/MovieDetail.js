@@ -76,15 +76,16 @@ class MovieDetail extends Component {
                 const usersSeenMovies = currentUser.moviesSeen.map(movie => movie.movieDBId);
                 const seenThisMovie = usersSeenMovies.includes(movie.id);
                 return(
-              <div>
+              <UserReviewSection>
                   {!seenThisMovie && <SeenMovie movie={movie} user={currentUser}/>}
                {seenThisMovie && <AddToFavorites movie={movie} user={currentUser}/>}
                {seenThisMovie &&<AddReview title={movie.title} username={currentUser.username} movieDBId={movie.id} posterPath={movie.poster_path}/>}
                     <div>
                       <h1>Reviews</h1>
+                      <SectionBreak></SectionBreak>
                       {inDB && <MovieReviews movieDBId={movie.id} />}
                     </div>
-              </div>
+              </UserReviewSection>
               )}}
               </Query>
             )}}
@@ -117,3 +118,17 @@ const MovieInfo = styled.div`
   }
 `;
 
+const UserReviewSection = styled.div`
+  margin: 2rem 10%;
+
+  h1 {
+    color: var(--main-green);
+    margin-bottom: 0;
+  }
+`;
+
+const SectionBreak = styled.hr`
+  border-top: .5px solid var(--main-green);
+  border-bottom: .5px solid var(--main-green);
+  margin: 0;
+`;
