@@ -36,15 +36,23 @@ export default function Nav() {
 
 const NavBar = styled.nav`
 	text-align: center;
-	padding-bottom: 0.2em;
-	padding-top: 2em;
-	background-color: #efefef;
-    box-shadow: -3px 3px 10px 0px rgba(168, 168, 168, 0.7);
+	background-color: var(--nav-bg-color);
+    box-shadow: -3px 3px 10px 0px rgba(19,32,48, 0.7);
+    position: sticky;
+    top: -1px;
+    padding: 1rem 0;
+    a {
+        color: var(--main-green);
+        font-size: 1rem;
+        text-transform: uppercase;
+    }
 `;
 
 const NavItems = styled.ul`
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 0;
+    margin-bottom: 0;
 `;
