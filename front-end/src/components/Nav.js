@@ -1,38 +1,57 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import User from '../components/auth/User';
 import Logout from './auth/Logout';
 
-export default function Nav() {
-  return (
-      <User>
-      {({data: {currentUser}}, loading) => {
-          if(loading) return <p>Loading</p>
-          return (
-        <NavBar>
-            <NavItems>
-                <Link to={`/`}>Home</Link>
-                {!currentUser && (
-                    <Fragment>
-                        <Link to={`/signup`}>Sign Up</Link>
-                        <Link to={`/signin`}>Sign In</Link>
-                    </Fragment>
-                )}
-                {currentUser && (
-                    <Fragment>
-                        <Link to={`/user/${currentUser._id}`}>Profile</Link>
-                        <Logout />
-                    </Fragment>
-                )}
-            </NavItems>
-        </NavBar>
-          )
-      }}
-      </User>
-  )
+class Nav extends Component {
+    componentDidMount(){
+    window.addEventListener("scroll", this.navScroll);    
+    }
+    componentWillUnmount() {
+    window.removeEventListener("scroll", this.navScroll);
+      }
+     navScroll = (e) => {
+        const nav = document.querySelector('nav');
+        if (document.body.scrollTop >= 200 ) {
+            nav.setAttribute("id", "nav-transparent");
+        } 
+        else {
+            nav.setAttribute("id", "nav-transparent");
+            nav.classList.remove("nav-colored");
+        }
+    }
+    render(){
+        return (
+            <User>
+            {({data: {currentUser}}, loading) => {
+                if(loading) return <p>Loading</p>
+                return (
+                <NavBar onClick={(e) => this.navScroll(e)}>
+                    <NavItems>
+                        <Link to={`/`}>Home</Link>
+                        {!currentUser && (
+                            <Fragment>
+                                <Link to={`/signup`}>Sign Up</Link>
+                                <Link to={`/signin`}>Sign In</Link>
+                            </Fragment>
+                        )}
+                        {currentUser && (
+                            <Fragment>
+                                <Link to={`/user/${currentUser._id}`}>Profile</Link>
+                                <Logout />
+                            </Fragment>
+                        )}
+                    </NavItems>
+                </NavBar>
+                )
+            }}
+            </User>
+        )
+    }
 }
+export default Nav;
 
 const NavBar = styled.nav`
 	text-align: center;
@@ -41,10 +60,14 @@ const NavBar = styled.nav`
     position: sticky;
     top: -1px;
     padding: 1rem 0;
+    z-index: 1;
     a {
         color: var(--main-green);
         font-size: 1rem;
         text-transform: uppercase;
+    }
+    a:hover {
+        color: var(--main-green-hover);
     }
 `;
 
