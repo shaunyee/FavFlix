@@ -4,7 +4,7 @@ import { Mutation } from 'react-apollo';
 
 import { GetMovie } from './MovieReviews';
 import { CurrentUserQuery } from './auth/User';
-
+import styled from 'styled-components';
 
 const ReviewMovie = gql`
 mutation($review: String!, $title: String!, $username: String!) {
@@ -52,7 +52,7 @@ class AddReview extends Component {
         <div>
             <form id="addReview" onSubmit={(e) => this.handleSubmit(e, addReview)}>
                 <textarea onChange={this.handleChange} name="review" cols="100" rows="5" />
-                <button>Add{loading ? "ing" : ""} Review</button>
+                <AddReviewButton>Add{loading ? "ing" : ""} Review</AddReviewButton>
             </form>
             {error && error.message}
         </div>
@@ -61,4 +61,19 @@ class AddReview extends Component {
     )
   }
 }
+
+const AddReviewButton = styled.button`
+    display: block;
+    background: var(--main-green);
+    border: none;
+    color: var(--main-bg-color);
+    font-size: 1rem;
+    padding: .75rem;
+    border-radius: 25px;
+    margin-top: .5rem;
+
+    :hover {
+        background: var(--main-green-hover);
+    }
+`;
 export default AddReview;
