@@ -108,7 +108,7 @@ const MovieInfo = styled.div`
   text-align: left;
   padding: 2rem 10%;
   display: flex;
-  color: white;
+  color: var(--main-text-color);
   h1 {
     color: var(--main-green);
   }
