@@ -44,6 +44,11 @@ class Profile extends Component {
                 const moviesFavoriteFirst = [...currentUser.favorites].reverse();
                 const limitMovieFavorites = moviesFavoriteFirst.splice(moviesFavoriteItems, 5);
                 const moviesFavoriteLeft = (currentUser.moviesSeen.length - moviesFavoriteFirst.length);
+                const fav = moviesFavoriteItems < moviesFavoriteLeft -1;
+                const showFavNext = fav && currentUser.favorites.length > 5;
+                const seen = movieSeenItems < moviesSeenLeft -1;
+                const showSeenNext = seen && currentUser.moviesSeen.length > 5
+                console.log(showSeenNext)
                 return(
                 <ProfileWrapper>
                     <h1>{currentUser.username}'s Profile</h1>
@@ -55,7 +60,7 @@ class Profile extends Component {
                             ))}
                     </MovieGrid>
                     {moviesFavoriteItems > 0 && <button onClick={this.lastFavMovie}>last</button>}
-                    {(moviesFavoriteItems < moviesFavoriteLeft -1) && <button onClick={this.nextFavMovie}>next</button>}
+                    {showFavNext && <button onClick={this.nextFavMovie}>next</button>}
                     <h3>Movies Seen</h3> <span>{currentUser.moviesSeen.length}</span>
                     <MovieGrid>
                       {limitMoviesSeen.map(movie => {
@@ -64,7 +69,7 @@ class Profile extends Component {
                       )})}
                     </MovieGrid>
                       {movieSeenItems > 0 && <button onClick={this.lastSeenMovie}>last</button>}
-                      {(movieSeenItems < moviesSeenLeft -1) && <button onClick={this.nextSeenMovie}>next</button>}
+                      {showSeenNext && <button onClick={this.nextSeenMovie}>next</button>}
                 </ProfileWrapper>
                 )}}
             </User>
