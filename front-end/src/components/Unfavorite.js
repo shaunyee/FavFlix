@@ -1,8 +1,11 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import styled from 'styled-components';
 
-import { CurrentUserQuery } from './auth/User'
+import { CurrentUserQuery } from './auth/User';
+import unFavoriteIcon from '../assets/unfavorite.svg';
+
 
 const UnfavoriteMovie = gql`
     mutation($title: String!, $username: String!){
@@ -21,9 +24,29 @@ const Unfavorite = ({movie, user}) => {
       >
       {(unfavorite, {loading}) => {
           return(
-            <button onClick={() => unfavorite()}>Unfavorit{loading ? "ing" : "e"}</button>
+            <UnFavoriteButton onClick={() => unfavorite()}><UnFavoriteIcon src={unFavoriteIcon} alt="unfav"/>Unfavorit{loading ? "ing" : "e"}</UnFavoriteButton>
           )}}
       </Mutation>
   )
 }
 export default Unfavorite;
+
+const UnFavoriteButton = styled.button`
+    display: block;
+    background: #FF5454;
+    border: none;
+    color: var(--main-bg-color);
+    font-size: 1rem;
+    padding: .75rem;
+    border-radius: 25px;
+    margin-top: .5rem;
+
+    :hover {
+        background: #BA3E3E;
+    }
+`;
+
+const UnFavoriteIcon = styled.img`
+    height: 30px;
+    width: 30px
+`;

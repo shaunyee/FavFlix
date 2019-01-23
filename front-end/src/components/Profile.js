@@ -48,7 +48,6 @@ class Profile extends Component {
                 const showFavNext = fav && currentUser.favorites.length > 5;
                 const seen = movieSeenItems < moviesSeenLeft -1;
                 const showSeenNext = seen && currentUser.moviesSeen.length > 5
-                console.log(showSeenNext)
                 return(
                 <ProfileWrapper>
                     <h1>{currentUser.username}'s Profile</h1>

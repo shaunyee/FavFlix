@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import { withRouter } from 'react-router-dom';
+import styled from 'styled-components';
 
 import { CurrentUserQuery } from './User';
 
@@ -26,9 +27,21 @@ mutation{
           query: CurrentUserQuery
       }]}>
       {(logout) => (
-        <button onClick={() => logoutUser(logout)}>Logout</button>
+        <LogoutButton onClick={() => logoutUser(logout)}>LOGOUT</LogoutButton>
       )}
       </Mutation>
   )
 }
 export default withRouter(Logout);
+
+const LogoutButton = styled.button`
+     background:none!important;
+     color: var(--main-green);
+     border:none; 
+     padding:0!important;
+     font: inherit;
+     cursor: pointer;
+     :hover{
+         color: var(--main-green-hover)
+     }
+`;

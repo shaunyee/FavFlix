@@ -16,6 +16,7 @@ query($movieDBId: Int!){
             _id
             review
             username
+            dateAdded
         }
     }
 }
@@ -31,7 +32,7 @@ class MovieReviews extends Component {
         {({data: {getMovie}, loading, error}) => {
             if(loading) return <div>Loading</div>;
             if(error) return <Error error={error.message}/>;
-            console.log(getMovie)
+            const sortReviews = [...getMovie.reviews].reverse();
             return(
                 <div>
                 <User>
@@ -40,7 +41,7 @@ class MovieReviews extends Component {
                       if(!currentUser){
                           return(
                             <div>
-                            { getMovie.reviews.map(review => {
+                            { sortReviews.map(review => {
                                 return(
                                 <ReviewWrapper key={review._id}>
                                     <MovieReviewSection>{review.review}<p>by: {review.username}</p></MovieReviewSection>
@@ -50,7 +51,7 @@ class MovieReviews extends Component {
                           )}
                       return(
                         <div>
-                            { getMovie.reviews.map(review => {
+                            { sortReviews.map(review => {
                                 const userReviews = currentUser.reviews.map(review => review._id);
                                 const madeReview = userReviews.includes(review._id);
                                 return(

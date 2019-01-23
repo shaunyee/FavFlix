@@ -1,10 +1,12 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import styled from 'styled-components';
 
 import Error from './utils/Error';
 import { CurrentUserQuery } from './auth/User';
 import Unfavorite from './Unfavorite';
+import favoriteIcon from '../assets/favorite.svg';
 
 const AddMovie = gql`
     mutation($title: String!, $movieDBId: Int!, $posterPath: String!){
@@ -51,7 +53,7 @@ const AddToFavorites = ({movie, user}) => {
           const alreadyFavorited = userFavIds.includes(movie.id);
           return(
               <div>
-              {alreadyFavorited ? <Unfavorite movie={movie} user={user} /> : <button onClick={() => handleFavorite(addMovie, favorite)}>Add{loading ? "ing" : ''} To Favorites</button>
+              {alreadyFavorited ? <Unfavorite movie={movie} user={user} /> : <FavoriteButton onClick={() => handleFavorite(addMovie, favorite)}><FavoriteIcon src={favoriteIcon} alt="fav"/>Favorit{loading ? "ing" : "e"}</FavoriteButton>
               }
                 {error && <Error err={error.message}/>}
               </div>
@@ -66,3 +68,23 @@ const AddToFavorites = ({movie, user}) => {
 
 export default AddToFavorites;
 export { AddMovie };
+
+const FavoriteButton = styled.button`
+    display: block;
+    background: #FF5454;
+    border: none;
+    color: var(--main-bg-color);
+    font-size: 1rem;
+    padding: .75rem;
+    border-radius: 25px;
+    margin-top: .5rem;
+
+    :hover {
+        background: #BA3E3E;
+    }
+`;
+
+const FavoriteIcon = styled.img`
+    height: 20px;
+    width: 20px
+`;

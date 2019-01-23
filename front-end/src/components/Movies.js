@@ -67,10 +67,12 @@ class Movies extends Component {
                         <MoviePoster movie={movie} key={movie.id}/>
                     )
                 })}</MovieGrid>
-                {
-                this.state.page !== 1 && <button onClick={this.lastPage}>&larr; last page</button>
-                }
-                <button onClick={this.nextPage}>next page &rarr;</button>
+                <ButtonDiv>
+                  {
+                  this.state.page !== 1 && <PageButtons onClick={this.lastPage}>&larr; last page</PageButtons>
+                  }
+                  <PageButtons onClick={this.nextPage}>next page &rarr;</PageButtons>
+                </ButtonDiv>
             </div>
         )
     }
@@ -83,4 +85,15 @@ const MovieGrid = styled.div`
   padding: 1rem;
   grid-template-columns: repeat(5, 1fr);
   grid-row-gap: 1rem;
+`;
+
+const PageButtons = styled.button`
+  background: none;
+  color: var(--main-green);
+  border: 2px solid var(--main-text-color);
+  font-size: 1rem;
+`;
+
+const ButtonDiv = styled.div`
+  display: inline-grid;
 `;
