@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 
 const cors = require('cors');
+const path = require('path');
 
 require('dotenv').config({path:'../variables.env'});
 const User = require('./models/User');
@@ -14,6 +15,12 @@ const Review = require('./models/Review');
 const {typeDefs} = require('./schema');
 const {resolvers} = require('./resolvers');
 
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static('front-end/build'));
+  app.get('*', (req,res) => {
+    res.sendFile(path.resolve(__dirname, 'front-end','build', 'index.html'))
+  });
+}
 
 const PORT = process.env.PORT || 4000;
 
