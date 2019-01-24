@@ -7,6 +7,7 @@ import Error from './utils/Error';
 import { CurrentUserQuery } from './auth/User';
 import Unfavorite from './Unfavorite';
 import favoriteIcon from '../assets/favorite.svg';
+import { GetMovie } from './MovieReviews';
 
 const AddMovie = gql`
     mutation($title: String!, $movieDBId: Int!, $posterPath: String!){
@@ -37,7 +38,7 @@ const AddToFavorites = ({movie, user}) => {
       title: movie.title,
       username: user.username
       }}
-      refetchQueries={[{query: CurrentUserQuery}]}
+      refetchQueries={[{query: CurrentUserQuery}, {query: GetMovie, variables: {movieDBId: movie.id}}]}
       >
       {(favorite, {loading}) => {
         return(

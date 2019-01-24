@@ -22,7 +22,7 @@ import Profile from './components/Profile';
 
 const client = new ApolloClient({
     link: createHttpLink({
-        uri: "https://fav-flix.heroku-app/graphql",
+        uri: "http://localhost:4000/graphql",
         credentials: "include"
     }),
     cache: new InMemoryCache()

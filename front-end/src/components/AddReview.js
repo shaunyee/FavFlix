@@ -28,7 +28,9 @@ class AddReview extends Component {
     }
     handleSubmit = async (e,addReview) => {
         e.preventDefault();
-        await addReview();
+        await addReview()
+        await document.getElementById("addReviewForm").reset();
+        await this.clearForm();
     }
     clearForm = () => {
         this.setState({
@@ -50,8 +52,8 @@ class AddReview extends Component {
         {(addReview, {loading, error }) => {
             return(
         <div>
-            <form id="addReview" onSubmit={(e) => this.handleSubmit(e, addReview)}>
-                <textarea onChange={this.handleChange} name="review" cols="100" rows="5" />
+            <form id="addReviewForm" onSubmit={(e) => this.handleSubmit(e, addReview)}>
+                <textarea onChange={this.handleChange} name="review" cols="100" rows="5" placeholder="Write a Review" />
                 <AddReviewButton>Add{loading ? "ing" : ""} Review</AddReviewButton>
             </form>
             {error && error.message}

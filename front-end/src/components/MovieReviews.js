@@ -12,6 +12,7 @@ query($movieDBId: Int!){
     getMovie(movieDBId: $movieDBId){
         _id
         likes
+        dislikes
         reviews {
             _id
             review

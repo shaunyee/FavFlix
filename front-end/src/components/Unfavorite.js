@@ -4,6 +4,7 @@ import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
 
 import { CurrentUserQuery } from './auth/User';
+import { GetMovie } from './MovieReviews';
 import unFavoriteIcon from '../assets/unfavorite.svg';
 
 
@@ -20,7 +21,7 @@ const Unfavorite = ({movie, user}) => {
       <Mutation 
       mutation={UnfavoriteMovie}
       variables={{title: movie.title, username: user.username}}
-      refetchQueries={[{query: CurrentUserQuery}]}
+      refetchQueries={[{query: CurrentUserQuery}, {query: GetMovie, variables: {movieDBId: movie.id}}]}
       >
       {(unfavorite, {loading}) => {
           return(

@@ -26,6 +26,7 @@ type Movie {
   movieDBId: Int!
   posterPath: String!
   likes: Int
+  dislikes: Int
   reviews: [Review]
 }
 type Review {

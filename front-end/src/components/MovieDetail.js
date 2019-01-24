@@ -8,6 +8,7 @@ import User from './auth/User';
 import MovieReviews from './MovieReviews';
 import AddReview from './AddReview';
 import SeenMovie from './SeenMovie';
+import MovieStats from './MovieStats';
 
 
 const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
@@ -67,6 +68,7 @@ class MovieDetail extends Component {
                 if(!currentUser){
                   return(
                       <UserReviewSection>
+                      {inDB && <MovieStats movieDBId={movie.id}/>}
                       <h1>Reviews</h1>
                       <SectionBreak></SectionBreak>
                       {inDB && <MovieReviews movieDBId={movie.id} />}
@@ -77,11 +79,12 @@ class MovieDetail extends Component {
                 const seenThisMovie = usersSeenMovies.includes(movie.id);
                 return(
               <UserReviewSection>
-                  {!seenThisMovie && <SeenMovie movie={movie} user={currentUser}/>}
-               {seenThisMovie && <AddToFavorites movie={movie} user={currentUser}/>}
-               {seenThisMovie &&<AddReview title={movie.title} username={currentUser.username} movieDBId={movie.id} posterPath={movie.poster_path}/>}
-                      <h1>Reviews</h1>
+                {!seenThisMovie && <SeenMovie movie={movie} user={currentUser}/>}
+                {seenThisMovie && <MovieStats movieDBId={movie.id}/>}
+                {seenThisMovie && <AddToFavorites movie={movie} user={currentUser}/>}
+                <h1>Reviews</h1>
                       <SectionBreak></SectionBreak>
+                      {seenThisMovie &&<AddReview title={movie.title} username={currentUser.username} movieDBId={movie.id} posterPath={movie.poster_path}/>}
                       {inDB && <MovieReviews movieDBId={movie.id} />}
               </UserReviewSection>
               )}}
@@ -133,4 +136,5 @@ const SectionBreak = styled.hr`
   border-top: .5px solid var(--main-green);
   border-bottom: .5px solid var(--main-green);
   margin: 0;
+  margin-bottom: 5px;
 `;
