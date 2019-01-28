@@ -24,6 +24,10 @@ const UserSchema = new Schema({
         type: [Schema.Types.ObjectId],
         refs: 'Movie'
     },
+    dislikes: {
+        type: [Schema.Types.ObjectId],
+        refs: 'Movie'
+    },
     reviews: {
         type: [Schema.Types.ObjectId],
         refs: 'Review',

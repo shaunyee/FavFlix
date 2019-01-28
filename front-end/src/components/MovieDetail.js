@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import AddToFavorites from './AddToFavorites';
 import User from './auth/User';
 import MovieReviews from './MovieReviews';
 import AddReview from './AddReview';
 import SeenMovie from './SeenMovie';
 import MovieStats from './MovieStats';
+import LikeOrDislke from './LikeOrDislke';
 
 
 const POSTER_PATH = 'http://image.tmdb.org/t/p/w154';
@@ -81,7 +81,7 @@ class MovieDetail extends Component {
               <UserReviewSection>
                 {!seenThisMovie && <SeenMovie movie={movie} user={currentUser}/>}
                 {seenThisMovie && <MovieStats movieDBId={movie.id}/>}
-                {seenThisMovie && <AddToFavorites movie={movie} user={currentUser}/>}
+                {seenThisMovie && <LikeOrDislke movie={movie} user={currentUser}/>}
                 <h1>Reviews</h1>
                       <SectionBreak></SectionBreak>
                       {seenThisMovie &&<AddReview title={movie.title} username={currentUser.username} movieDBId={movie.id} posterPath={movie.poster_path}/>}

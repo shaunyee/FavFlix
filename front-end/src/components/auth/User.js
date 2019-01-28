@@ -13,6 +13,9 @@ query {
             posterPath
             movieDBId
         }
+        dislikes{
+            _id
+        }
         reviews{
             _id
         }

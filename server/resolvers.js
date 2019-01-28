@@ -93,6 +93,15 @@ exports.resolvers = {
         const user = await User.findOneAndUpdate({username}, {$pull: {favorites: movie._id}});
         return movie
       },
+      dislikeMovie: async (root, { title, username }, { Movie, User }) => {
+        const movie = await Movie.findOneAndUpdate({ title }, {$inc: { dislikes: 1 }});
+        const user = await User.findOneAndUpdate({ username }, {$addToSet: { dislikes: movie._id }})
+        return movie
+      },
+      relikeMovie: async (root, { title, username }, { Movie, User }) => {
+        const movie = await Movie.findOneAndUpdate({ title }, {$inc: { dislikes: -1 }});
+        const user = await User.findOneAndUpdate({ username }, {$pull: { dislikes: movie._id }})
+      },
       addReview: async (root, { review, title, username, }, {Review, User, Movie}) => {
         const newReview = await new Review({
             review,

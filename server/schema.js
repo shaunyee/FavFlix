@@ -17,6 +17,7 @@ type User {
   email: String!
   joinDate: String
   favorites: [Movie]
+  dislikes: [Movie]
   reviews: [Review]
   moviesSeen: [Movie]
 }
@@ -42,6 +43,8 @@ type Mutation {
   addMovie(title: String!, movieDBId: Int!, posterPath: String!): Movie!
   favorite(title: String!, username: String!): Movie
   unfavorite(title: String!, username: String!): Movie
+  dislikeMovie(title: String! username: String!): Movie
+  relikeMovie(title: String!, username: String!): Movie
   seenMovie(title: String!, username: String!): Movie
   addReview(review: String!, title: String!, username: String!): Review!
   deleteReview(_id: String!): SucessMessage 

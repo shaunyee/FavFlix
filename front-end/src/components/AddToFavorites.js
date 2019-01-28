@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
 import styled from 'styled-components';
@@ -53,11 +53,11 @@ const AddToFavorites = ({movie, user}) => {
           const userFavIds = user.favorites.map(fav => fav.movieDBId);
           const alreadyFavorited = userFavIds.includes(movie.id);
           return(
-              <div>
+              <Fragment>
               {alreadyFavorited ? <Unfavorite movie={movie} user={user} /> : <FavoriteButton onClick={() => handleFavorite(addMovie, favorite)}><FavoriteIcon src={favoriteIcon} alt="fav"/>Favorit{loading ? "ing" : "e"}</FavoriteButton>
               }
                 {error && <Error err={error.message}/>}
-              </div>
+              </Fragment>
             
           )
       }}
@@ -72,7 +72,7 @@ export { AddMovie };
 
 const FavoriteButton = styled.button`
     display: block;
-    background: #FF5454;
+    background: var(--main-green);
     border: none;
     color: var(--main-bg-color);
     font-size: 1rem;
@@ -81,7 +81,7 @@ const FavoriteButton = styled.button`
     margin-top: .5rem;
 
     :hover {
-        background: #BA3E3E;
+        background: var(--main-green-hover);
     }
 `;
 
